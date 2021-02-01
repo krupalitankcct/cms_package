@@ -1,0 +1,187 @@
+<?php
+
+namespace Cms\Cmspackage\Http\Controllers\Backend;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Cms\Cmspackage\Models\Cms;
+use Illuminate\Support\Facades\Validator;
+use Redirect;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Config;
+
+class CmsController extends Controller
+{
+    protected $cms;
+    /**
+     * 
+     * @param Cms cms
+     */
+    public function __construct(Cms $cms) {
+        $this->cms = $cms;
+    }
+    public function index()
+    {
+        try{
+            //get all cms list
+            $cms = Cms::all(); 
+            // pagination 
+            $cms = Cms::paginate(Config::get('cms.per_page.max_record'));
+            // return redirect
+            return view('cms::Backend.list',compact('cms'));
+
+        }catch (\Exception $ex) {
+            Log::error($ex->getMessage());
+            return view('cms::error.505')->withFlashDanger($ex->getMessage());
+        }
+    }
+
+    public function create()
+    {
+        // return view form 
+        return view('cms::Backend.add');
+    }
+
+    public function store(Request $request)
+    {
+        try{
+        //validation rules
+        $validator = Validator::make($request->all(),[
+            'name' => 'required|min:3',
+            'slug' => 'required|unique:cms|alpha',
+            'description' => 'required',
+        ]);
+       //check validation
+        if ($validator->fails()) {
+            return Redirect::back()->withErrors($validator);
+        }
+        // create 
+        $cms = Cms::create([
+                            'name' => $request->name,
+                            'slug' => $request->slug,
+                            'description' => $request->description,
+                            'meta_title' => $request->meta_title,
+                            'meta_keywords' => $request->meta_keywords,
+                            'meta_description' => $request->meta_description,
+                            'status' => $request->status
+                          ]);
+
+        return redirect()->route('cms.cms_list')->withFlashSuccess('CMS added successfully');
+
+        }catch (\Exception $ex) {
+            Log::error($ex->getMessage());
+            return view('cms::Backend.error.505')->withFlashDanger($ex->getMessage());
+        }
+        
+    }
+
+    public function edit($id)
+    {
+        $cmsPageEdit =  Cms::findOrFail($id);
+        return view('cms::Backend.edit', compact('cmsPageEdit'));
+    }
+
+    public function update(Request $request,$id)
+    {
+        try{
+        //validation rules
+        $validatedData = Validator::make($request->all(),[
+            'name' => 'required|min:3',
+            'slug' => 'required|unique:cms,slug,'.$id.',id,deleted_at,NULL',
+            'description' => 'required',
+            'meta_title' => 'string|max:255|nullable',
+            'meta_keywords' => 'string|max:255|nullable',
+            'meta_description' => 'string|max:255|nullable',
+            'status' =>'required'
+        ]);
+        //check validation
+        if ($validatedData->fails($validatedData)) {
+            return Redirect::back()->withErrors($validatedData);
+        }
+        //update data
+       Cms::whereId($id)->update([
+            'name' => $request->name,
+            'slug' => $request->slug,
+            'description' => $request->description,
+            'meta_title' => $request->meta_title,
+            'meta_keywords' => $request->meta_keywords,
+            'meta_description' => $request->meta_description,
+            'status' => $request->status
+        ]);
+        return redirect()->route('cms.cms_list')->withFlashSuccess('CMS edit successfully');
+
+        }catch (\Exception $ex) {
+            Log::error($ex->getMessage());
+            return view('cms::Backend.error.505')->withFlashDanger($ex->getMessage());
+        }
+    }
+
+    public function destroy($id)
+    {
+       try{
+        //check exit or not
+        $cms = Cms::findOrFail($id);
+        //delete 
+        $cms->delete();
+        // return redirect method
+        return redirect()->route('cms.cms_list')->withFlashSuccess('CMS remove successfully');
+
+        }catch (\Exception $ex) {
+            Log::error($ex->getMessage());
+            return view('cms::Backend.error.505')->withFlashDanger($ex->getMessage());
+        }
+    }
+
+    public function upload(Request $request)
+    {
+        if($request->hasFile('upload')) {
+            //get filename with extension
+            $filenamewithextension = $request->file('upload')->getClientOriginalName();
+
+            //get filename without extension
+            $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
+
+            //get file extension
+            $extension = $request->file('upload')->getClientOriginalExtension();
+
+            //filename to store
+            $filenametostore = $filename.'_'.time().'.'.$extension;
+
+            //Upload File
+            $request->file('upload')->move(public_path('cms/uploads'), $filenametostore);
+            $CKEditorFuncNum = $request->input('CKEditorFuncNum');
+            $url = asset('cms/uploads/'.$filenametostore);
+            $msg = 'Image successfully uploaded';
+            $re = "<script>window.parent.CKEDITOR.tools.callFunction($CKEditorFuncNum, '$url', '$msg')</script>";
+
+            // Render HTML output
+            @header('Content-type: text/html; charset=utf-8');
+            echo $re;
+        }
+    }
+
+    public function active($id)
+    {
+        $cmsUpdate = $this->cms->findOrFail($id);
+        $cmsUpdate->status = 'Active';
+        $cmsUpdate->save();
+
+        // return redirect method
+        return redirect()->route('cms.cms_list')->withFlashSuccess('CMS Active successfully');
+    }
+
+    /**
+     * Inactive Site User
+     * @param $id
+     * @return mixed
+     */
+    public function inactive($id)
+    {
+        $cmsUpdate = $this->cms->findOrFail($id);
+        $cmsUpdate->status = 'Inactive';
+        $cmsUpdate->save();
+
+       // return redirect method
+        return redirect()->route('cms.cms_list')->withFlashSuccess('CMS Inactive successfully');
+    }
+}

@@ -1,0 +1,38 @@
+{
+    "name": "cms/cms-package",
+    "description": "CMS package",
+    "type": "project",
+    "license": "MIT",
+    "version": "v1.0.0",
+    "authors": [
+        {
+            "name": "krupalibit1998",
+            "email": "krupali.t@communicationcrafts.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "Cms\\Cmspackage\\": "src/",
+            "Cms\\Cmspackage\\Tests\\": "tests/"
+        }
+    },
+    "extra": 
+    {
+      "laravel": 
+      {
+          "providers": [ "Cms\\Cmspackage\\CmsServiceProvider" ]
+      }
+    },
+    "scripts": {
+        "post-package-install": [
+            "php artisan vendor:publish --tag=advertisement-config --force"
+        ],
+        "post-package-update": [
+            "php artisan vendor:publish --tag=advertisement-config --force"
+        ]
+    },
+    "require": {
+    }
+    
+}
