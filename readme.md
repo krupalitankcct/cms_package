@@ -5,6 +5,8 @@ composer create-project cms/content-management
 
 1.php artisan migrate
 
+2.this route to view your cms page list your project directory admin/cms_list
+
 ### Configuration
 
 If you want to change these options, you'll have to publish the `config` file.
