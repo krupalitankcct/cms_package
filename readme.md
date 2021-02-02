@@ -1,33 +1,9 @@
-If you're using Laravel 8, this is all there is to do.
-
+Daynamic content management packages 
 Run bellow command to install
 
-composer require cms/cms-package
-
-Now all you have to do is add the service provider of the package and alias the package. To do this open your `config/app.php` file.
-Should you still be on version 8 of Laravel, the final steps for you are to add the service provider of the package and alias the package. To do this open your `config/app.php` file.
-
-Add a new line to the `providers` array:
-
-	Cms\\Cmspackage\\CmsServiceProvider::class
-
-Now you're ready to start using the cmsPackage in your application.
-
-Then follow bellow steps
+composer create-project cms/content-management
 
 1.php artisan migrate
-
-**As of version 1 of this package it's possibly to use dependency injection to inject an instance of the Cart class into your controller or other class**
-## Overview
-Look at one of the following topics to learn more about LaravelCms
-* [Usage](#usage)
-* [Collections](#collections)
-* [Instances](#instances)
-* [Models](#models)
-* [Database](#database)
-* [Exceptions](#exceptions)
-* [Events](#events)
-* [Example](#example)
 
 ### Configuration
 
@@ -38,10 +14,9 @@ This will give you a `cms.php` config file in which you can make the changes.
 To make your life easy, the package also includes a ready to use `migration` which you can publish by running:
     php artisan vendor:publish --provider="Cms\Cmspackage\CmsServiceProvider" --tag="migrations"
     
-This will place a `Cmsdatabase` table's migration file into `database/migrations` directory. Now all you have to do is run `php artisan migrate` to migrate your database.
-
 Then run bellow command to publish config and resource files
 
+If you want to change these options, you'll have to publish the `views` file.
 php artisan vendor:publish --provider="Cms\Cmspackage\CmsServiceProvider" --tag="views"
 
 php artisan vendor:publish --provider="Cms\Cmspackage\CmsServiceProvider" --tag="lang"
