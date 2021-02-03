@@ -32,7 +32,7 @@ class CmsController extends Controller
 
         }catch (\Exception $ex) {
             Log::error($ex->getMessage());
-            return view('cms::error.505')->withFlashDanger($ex->getMessage());
+            return view('cms::Backend.error.505')->withFlashDanger($ex->getMessage());
         }
     }
 
@@ -66,7 +66,7 @@ class CmsController extends Controller
                             'status' => $request->status
                           ]);
 
-        return redirect()->route('cms.cms_list')->withFlashSuccess('CMS added successfully');
+        return redirect()->route('cms.cms_list')->withFlashSuccess(__('cms_lang::validation.custom.cms_add'));
 
         }catch (\Exception $ex) {
             Log::error($ex->getMessage());
@@ -108,7 +108,7 @@ class CmsController extends Controller
             'meta_description' => $request->meta_description,
             'status' => $request->status
         ]);
-        return redirect()->route('cms.cms_list')->withFlashSuccess('CMS edit successfully');
+        return redirect()->route('cms.cms_list')->withFlashSuccess(__('cms_lang::validation.custom.cms_edit'));
 
         }catch (\Exception $ex) {
             Log::error($ex->getMessage());
@@ -124,7 +124,7 @@ class CmsController extends Controller
         //delete 
         $cms->delete();
         // return redirect method
-        return redirect()->route('cms.cms_list')->withFlashSuccess('CMS remove successfully');
+        return redirect()->route('cms.cms_list')->withFlashSuccess(__('cms_lang::validation.custom.cms_remove'));
 
         }catch (\Exception $ex) {
             Log::error($ex->getMessage());
@@ -167,7 +167,7 @@ class CmsController extends Controller
         $cmsUpdate->save();
 
         // return redirect method
-        return redirect()->route('cms.cms_list')->withFlashSuccess('CMS Active successfully');
+        return redirect()->route('cms.cms_list')->withFlashSuccess(__('cms_lang::validation.custom.cms_active'));
     }
 
     /**
@@ -182,6 +182,6 @@ class CmsController extends Controller
         $cmsUpdate->save();
 
        // return redirect method
-        return redirect()->route('cms.cms_list')->withFlashSuccess('CMS Inactive successfully');
+        return redirect()->route('cms.cms_list')->withFlashSuccess(__('cms_lang::validation.custom.cms_inactive'));
     }
 }

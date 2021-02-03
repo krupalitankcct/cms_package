@@ -1,5 +1,5 @@
 {
-    "name": "cms/content-management",
+    "name": "cms/cms-package",
     "description": "CMS package",
     "type": "project",
     "license": "MIT",
