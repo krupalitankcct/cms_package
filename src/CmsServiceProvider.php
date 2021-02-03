@@ -1,19 +1,19 @@
 <?php 
 
-namespace Cms\Cmspackage;
+namespace cms\cms_package;
 use Illuminate\Support\ServiceProvider;
 use Artisan;
 use Illuminate\Support\Facades\Blade;
-use Cms\Cmspackage\View\Components\CmsAdd;
-use Cms\Cmspackage\View\Components\CmsEdit;
-use Cms\Cmspackage\View\Components\CmsList;
-use Cms\Cmspackage\View\Components\CmsPage;
+use cms\cms_package\View\Components\CmsAdd;
+use cms\cms_package\View\Components\CmsEdit;
+use cms\cms_package\View\Components\CmsList;
+use cms\cms_package\View\Components\CmsPage;
 
 class CmsServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        
+        dd('hello');
         $this->loadMigrationsFrom(__DIR__.'/./../publishable/database/migrations');
         $this->loadViewsFrom(__DIR__.'/./../resources/views','cms');
         $this->loadViewsFrom(__DIR__.'/./../resources/views/Frontend','cms_frontend');
@@ -34,13 +34,13 @@ class CmsServiceProvider extends ServiceProvider
             __DIR__.'/./../resources/lang' => resource_path('lang'),
         ],'lang');
 
-        $this->app['router']->namespace('Cms\Cmspackage\Http\Controllers\Backend')
+        $this->app['router']->namespace('cms\cms_package\Http\Controllers\Backend')
                 ->middleware(['web'])
                 ->group(function () {
                     $this->loadRoutesFrom(__DIR__ . '/routes/cms.php');
                 });
 
-        $this->app['router']->namespace('Cms\Cmspackage\Http\Controllers\Frontend')
+        $this->app['router']->namespace('cms\cms_package\Http\Controllers\Frontend')
                 ->middleware(['web'])
                 ->group(function () {
                     $this->loadRoutesFrom(__DIR__ . '/routes/cmspage.php');
