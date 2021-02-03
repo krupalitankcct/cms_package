@@ -1,6 +1,6 @@
 <?php 
 
-namespace cms\cms_package;
+namespace Cms\Cmspackage;
 use Illuminate\Support\ServiceProvider;
 use Artisan;
 use Illuminate\Support\Facades\Blade;
@@ -13,7 +13,6 @@ class CmsServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        dd('hello');
         $this->loadMigrationsFrom(__DIR__.'/./../publishable/database/migrations');
         $this->loadViewsFrom(__DIR__.'/./../resources/views','cms');
         $this->loadViewsFrom(__DIR__.'/./../resources/views/Frontend','cms_frontend');
@@ -34,13 +33,13 @@ class CmsServiceProvider extends ServiceProvider
             __DIR__.'/./../resources/lang' => resource_path('lang'),
         ],'lang');
 
-        $this->app['router']->namespace('cms\cms_package\Http\Controllers\Backend')
+        $this->app['router']->namespace('Cms\Cmspackage\Http\Controllers\Backend')
                 ->middleware(['web'])
                 ->group(function () {
                     $this->loadRoutesFrom(__DIR__ . '/routes/cms.php');
                 });
 
-        $this->app['router']->namespace('cms\cms_package\Http\Controllers\Frontend')
+        $this->app['router']->namespace('Cms\Cmspackage\Http\Controllers\Frontend')
                 ->middleware(['web'])
                 ->group(function () {
                     $this->loadRoutesFrom(__DIR__ . '/routes/cmspage.php');
