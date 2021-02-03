@@ -1,7 +1,7 @@
 Daynamic content management packages 
 Run bellow command to install
 
-composer create-project cms/content-management
+composer require cms/content-management
 
 1.php artisan migrate
 
