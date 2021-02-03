@@ -4,10 +4,10 @@ namespace Cms\Cmspackage;
 use Illuminate\Support\ServiceProvider;
 use Artisan;
 use Illuminate\Support\Facades\Blade;
-use cms\cms_package\View\Components\CmsAdd;
-use cms\cms_package\View\Components\CmsEdit;
-use cms\cms_package\View\Components\CmsList;
-use cms\cms_package\View\Components\CmsPage;
+use Cms\Cmspackage\View\Components\CmsAdd;
+use Cms\Cmspackage\View\Components\CmsEdit;
+use Cms\Cmspackage\View\Components\CmsList;
+use Cms\Cmspackage\View\Components\CmsPage;
 
 class CmsServiceProvider extends ServiceProvider
 {
