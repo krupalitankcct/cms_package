@@ -1,9 +1,9 @@
 <?php
 
-namespace Cms\Cmspackage\Tests;
+namespace cms\cmspackage\Tests;
 
 use Tests\TestCase;
-use Cms\Cmspackage\CmsServiceProvider;
+use cms\cmspackage\CmsServiceProvider;
 use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 
 class TestCase extends BaseTestCase

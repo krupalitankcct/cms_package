@@ -1,5 +1,5 @@
 {
-    "name": "cms/content-management",
+    "name": "cms/cmspackage",
     "description": "CMS package",
     "type": "project",
     "license": "MIT",
@@ -13,15 +13,16 @@
     "minimum-stability": "dev",
     "autoload": {
         "psr-4": {
-            "Cms\\Cmspackage\\": "src/",
-            "Cms\\Cmspackage\\Tests\\": "tests/"
+            "App\\": "app/",
+            "cms\\cmspackage\\": "src/",
+            "cms\\cmspackage\\Tests\\": "tests/"
         }
     },
     "extra": 
     {
       "laravel": 
       {
-          "providers": [ "Cms\\Cmspackage\\CmsServiceProvider" ]
+          "providers": [ "cms\\cmspackage\\CmsServiceProvider" ]
       }
     },
     "scripts": {

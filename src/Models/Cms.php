@@ -1,6 +1,6 @@
 <?php
 
-namespace Cms\Cmspackage\Models;
+namespace cms\cmspackage\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;

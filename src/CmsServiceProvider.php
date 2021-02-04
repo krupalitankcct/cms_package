@@ -1,13 +1,13 @@
 <?php 
 
-namespace Cms\Cmspackage;
+namespace cms\cmspackage;
 use Illuminate\Support\ServiceProvider;
 use Artisan;
 use Illuminate\Support\Facades\Blade;
-use Cms\Cmspackage\View\Components\CmsAdd;
-use Cms\Cmspackage\View\Components\CmsEdit;
-use Cms\Cmspackage\View\Components\CmsList;
-use Cms\Cmspackage\View\Components\CmsPage;
+use cms\cmspackage\View\Components\CmsAdd;
+use cms\cmspackage\View\Components\CmsEdit;
+use cms\cmspackage\View\Components\CmsList;
+use cms\cmspackage\View\Components\CmsPage;
 
 class CmsServiceProvider extends ServiceProvider
 {
@@ -33,13 +33,13 @@ class CmsServiceProvider extends ServiceProvider
             __DIR__.'/./../resources/lang' => resource_path('lang'),
         ],'lang');
 
-        $this->app['router']->namespace('Cms\Cmspackage\Http\Controllers\Backend')
+        $this->app['router']->namespace('cms\cmspackage\Http\Controllers\Backend')
                 ->middleware(['web'])
                 ->group(function () {
                     $this->loadRoutesFrom(__DIR__ . '/routes/cms.php');
                 });
 
-        $this->app['router']->namespace('Cms\Cmspackage\Http\Controllers\Frontend')
+        $this->app['router']->namespace('cms\cmspackage\Http\Controllers\Frontend')
                 ->middleware(['web'])
                 ->group(function () {
                     $this->loadRoutesFrom(__DIR__ . '/routes/cmspage.php');

@@ -1,10 +1,10 @@
 <?php
 
-namespace Cms\Cmspackage\Http\Controllers\Frontend;
+namespace cms\cmspackage\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Cms\Cmspackage\Models\Cms;
+use cms\cmspackage\Models\Cms;
 use Illuminate\Support\Facades\Validator;
 use Redirect;
 use Illuminate\Support\Facades\Log;
