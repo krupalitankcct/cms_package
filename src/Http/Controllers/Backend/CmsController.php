@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use Redirect;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Config;
+use Session;
 
 class CmsController extends Controller
 {
@@ -20,15 +21,37 @@ class CmsController extends Controller
     public function __construct(Cms $cms) {
         $this->cms = $cms;
     }
-    public function index()
+    public function index(Request $request)
     {
         try{
-            //get all cms list
-            $cms = Cms::all(); 
-            // pagination 
-            $cms = Cms::paginate(Config::get('cms.per_page.max_record'));
+
+        //initialise values
+        $request['search_name'] = (Session::has('name'))?Session::get('name'):$request->get('name');
+        $request['search_slug'] = (Session::has('slug'))?Session::get('slug'):$request->get('slug');
+        $request['search_status'] = (Session::has('status'))?Session::get('status'):$request->get('status');
+
+        $search_name   = $request->get('name');
+        $search_slug   = $request->get('slug');
+        $search_status = $request->get('status');
+        //get all cms list
+        $cms = cms::select('cms.*');
+        if($search_name)
+        {
+          $cms->where('name', 'like', '%' . $search_name . '%');
+        }
+        if($search_slug)
+        {
+          $cms->where('slug', 'like', '%' . $search_slug . '%');
+        }
+        if($search_status)
+        {
+          $cms->where('status',$search_status);
+        }
+
+        $cms = $cms->get();
+
             // return redirect
-            return view('cms::Backend.list',compact('cms'));
+        return view('cms::Backend.list',compact('cms'));
 
         }catch (\Exception $ex) {
             Log::error($ex->getMessage());

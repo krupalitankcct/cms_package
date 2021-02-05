@@ -8,4 +8,20 @@ return [
 		'cms_active'=>'CMS active',
 		'cms_inactive'=>'CMS Inactive',
 	],
+	'cms_list'=>[
+		'slug'=>'Slug',
+		'name'=>'Name',
+		'cms_add'=>'Add CMS',
+		'status'=>'Status',
+		'no_record'=>'No Record Found',
+	],
+	'cms_add'=>[
+		'title'=>'CMS Title',
+		'slug'=>'CMS Slug',
+		'discription'=>'CMS Description',
+		'meta_title'=>'Meta Title',
+		'meta_des'=>'Meta Description',
+		'meta_key'=>'Meta keyword',
+		'status'=>'Status'
+	]
 ];

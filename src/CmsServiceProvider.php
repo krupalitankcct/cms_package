@@ -68,6 +68,9 @@ class CmsServiceProvider extends ServiceProvider
         $this->publishes([__DIR__.'/Models' => app_path('Models/cms/'),
             ], 'Models');
 
+        $this->publishes([__DIR__.'/Helpers' => 'app/Helpers/',
+        ], 'helpers');
+
         $this->loadViewComponentsAs('courier', [
             CmsAdd::class,
             CmsEdit::class,

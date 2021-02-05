@@ -2,6 +2,7 @@
 
 Route::group(['prefix' => '', 'as' => 'cms.'], function () {
     Route::get('/admin/cms_list', 'CmsController@index')->name('cms_list');
+    Route::post('/admin/cms_list', 'CmsController@index')->name('cms_list');
 	Route::get('/admin/cms_add', 'CmsController@create')->name('cms_add');
 	Route::post('/admin/cms_store', 'CmsController@store')->name('cms_store');
 	Route::get('/admin/cms_edit/{id}', 'CmsController@edit')->name('cms_edit');
