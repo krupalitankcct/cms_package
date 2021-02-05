@@ -5,22 +5,13 @@
         <div class="animated fadeIn">
             <div class="row">
                 <div class="col-sm-12 col-md-12">
+                    @include('cms::Backend.messages')
                     <div class="card">
                         <div class="card-header">
                             <i class="fa fa-align-justify"></i> {{__('cms_lang::validation.custom.Cms_header')}}
                         </div>
-                            @include('cms::Backend.messages')
 
                         <div class="card-body">
-                            @if ($errors->any())
-                                <div class="alert alert-danger">
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            @endif
                         <form action="{{ route('cms.cms_update',$cmsPageEdit->id) }}" class="form-horizontal" method="post"> 
                             {{ csrf_field() }}
                             <div class="row mt-4">

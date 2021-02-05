@@ -25,6 +25,8 @@ class CmsController extends Controller
     {
         try{
 
+        
+
         //initialise values
         $request['search_name'] = (Session::has('name'))?Session::get('name'):$request->get('name');
         $request['search_slug'] = (Session::has('slug'))?Session::get('slug'):$request->get('slug');
@@ -35,6 +37,20 @@ class CmsController extends Controller
         $search_status = $request->get('status');
         //get all cms list
         $cms = cms::select('cms.*');
+
+        if(isset($filter['sort_by']) && $filter['sort_by'] != '') {
+                 $orderBy= $filter['sort_by'];
+         } else {
+             $orderBy = 'created_at';
+         }
+
+         if(isset($filter['sort_dir']) && $filter['sort_dir'] != '') {
+             $sortDir = $filter['sort_dir'];
+         } else {
+             $sortDir = 'ASC';
+         }
+         $cms = $cms->orderBy($orderBy, $sortDir);
+
         if($search_name)
         {
           $cms->where('name', 'like', '%' . $search_name . '%');
