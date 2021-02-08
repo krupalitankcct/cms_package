@@ -36,13 +36,13 @@ class CmsServiceProvider extends ServiceProvider
         $this->app['router']->namespace('cms\cmspackage\Http\Controllers\Backend')
                 ->middleware(['web'])
                 ->group(function () {
-                    $this->loadRoutesFrom(__DIR__ . '/routes/cms.php');
+                    $this->loadRoutesFrom(__DIR__ . '/Routes/cms.php');
                 });
 
         $this->app['router']->namespace('cms\cmspackage\Http\Controllers\Frontend')
                 ->middleware(['web'])
                 ->group(function () {
-                    $this->loadRoutesFrom(__DIR__ . '/routes/cmspage.php');
+                    $this->loadRoutesFrom(__DIR__ . '/Routes/cmspage.php');
                 });
 
         $this->loadTranslationsFrom(__DIR__.'/./../resources/lang', 'cms_lang');
@@ -56,7 +56,7 @@ class CmsServiceProvider extends ServiceProvider
         $this->publishes([__DIR__.'/./../publishable/database/migrations' => database_path('migrations'),
             ], 'migration');
 
-        $this->publishes([__DIR__.'/routes/cms.php' => 'routes/cms.php',
+        $this->publishes([__DIR__.'/Routes/cms.php' => 'routes/cms.php',
             ], 'route');
 
         $this->publishes([__DIR__.'/http/controllers/Backend' => app_path('http/controllers/backend/cms/'),
