@@ -1,6 +1,6 @@
 <?php
 
-namespace cms\cmspackage\View\Components;
+namespace cms\cmspackage\View\Components\Backend;
 use Illuminate\View\Component;
 use Illuminate\Support\Facades\Blade;
 
