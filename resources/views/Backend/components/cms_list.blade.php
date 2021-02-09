@@ -43,9 +43,9 @@
                             <table class="table table-responsive-sm table-striped">
                                 <thead>
                                 <tr>
-                                    <th>{!! SortingHelper::instance()->sort('name',__('cms_lang::validation.cms_list.name'))  !!}</th>
-                                    <th>{!! SortingHelper::instance()->sort('slug',__('cms_lang::validation.cms_list.slug'))  !!}</th>
-                                    <th>{!! SortingHelper::instance()->sort('status',__('cms_lang::validation.cms_list.status'))  !!}</th>
+                                    <th>{{__('cms_lang::validation.cms_list.name') }}</th>
+                                    <th>{{__('cms_lang::validation.cms_list.slug') }}</th>
+                                    <th>{{__('cms_lang::validation.cms_list.status') }}</th>
                                     <th>Operation</th>
                                 </tr>
                                 
