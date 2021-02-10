@@ -25,8 +25,6 @@ class CmsController extends Controller
     {
         try{
 
-        
-
         //initialise values
         $request['search_name'] = (Session::has('name'))?Session::get('name'):$request->get('name');
         $request['search_slug'] = (Session::has('slug'))?Session::get('slug'):$request->get('slug');
@@ -66,9 +64,15 @@ class CmsController extends Controller
 
         $cms = $cms->get();
 
-            // return redirect
-        return view('cms::Backend.list',compact('cms'));
+        // return redirect
 
+        if(config::get('cms.use_published_view')){
+
+            return view('backend.cms.components.cms_list',compact('cms'));
+        }else{
+            return view('cms::Backend.list',compact('cms'));
+        }
+        
         }catch (\Exception $ex) {
             Log::error($ex->getMessage());
             return view('cms::Backend.error.505')->withFlashDanger($ex->getMessage());
@@ -78,7 +82,12 @@ class CmsController extends Controller
     public function create()
     {
         // return view form 
-        return view('cms::Backend.add');
+        if(config::get('cms.use_published_view')){
+            return view('backend.cms.components.cms_add');
+        }else{
+            return view('cms::Backend.add');
+  
+        }
     }
 
     public function store(Request $request)
@@ -117,7 +126,13 @@ class CmsController extends Controller
     public function edit($id)
     {
         $cmsPageEdit =  Cms::findOrFail($id);
-        return view('cms::Backend.edit', compact('cmsPageEdit'));
+        if(config::get('cms.use_published_view')){
+            
+            return view('backend.cms.components.cms_edit', compact('cmsPageEdit'));
+        }else{
+           return view('cms::Backend.edit', compact('cmsPageEdit'));
+  
+        }
     }
 
     public function update(Request $request,$id)
