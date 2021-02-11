@@ -24,6 +24,10 @@ class CmsPage extends Component
      */
     public function render()
     {
-        return view('cms_frontend::components.cms_page');
+        if(config::get('cms.use_published_view') == "true"){
+            return view('frontend.cms.components.cms_page');
+        }else{
+           return view('cms::Frontend.components.cms_page');
+        }
     }
 }

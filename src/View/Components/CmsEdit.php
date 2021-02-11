@@ -24,6 +24,10 @@ class CmsEdit extends Component
      */
     public function render()
     {
-        return view('cms::Backend.components.cms_edit');
+        if(config::get('cms.use_published_view') == "true"){
+            return view('backend.cms.components.cms_edit');
+        }else{
+            return view('cms::Backend.components.cms_edit');
+        }
     }
 }

@@ -65,13 +65,7 @@ class CmsController extends Controller
         $cms = $cms->get();
 
         // return redirect
-
-        if(config::get('cms.use_published_view')){
-
-            return view('backend.cms.components.cms_list',compact('cms'));
-        }else{
-            return view('cms::Backend.list',compact('cms'));
-        }
+        return view('cms::Backend.list',compact('cms'));
         
         }catch (\Exception $ex) {
             Log::error($ex->getMessage());
@@ -82,12 +76,7 @@ class CmsController extends Controller
     public function create()
     {
         // return view form 
-        if(config::get('cms.use_published_view')){
-            return view('backend.cms.components.cms_add');
-        }else{
-            return view('cms::Backend.add');
-  
-        }
+        return view('cms::Backend.add');
     }
 
     public function store(Request $request)
@@ -126,13 +115,9 @@ class CmsController extends Controller
     public function edit($id)
     {
         $cmsPageEdit =  Cms::findOrFail($id);
-        if(config::get('cms.use_published_view')){
-            
-            return view('backend.cms.components.cms_edit', compact('cmsPageEdit'));
-        }else{
-           return view('cms::Backend.edit', compact('cmsPageEdit'));
-  
-        }
+        
+        return view('cms::Backend.edit', compact('cmsPageEdit'));
+
     }
 
     public function update(Request $request,$id)
