@@ -6,7 +6,7 @@ Daynamic content management packages Run bellow command to install
     
 ### Migration
 
-1.php artisan migrate
+    php artisan migrate
 
 ### Route Url
 
