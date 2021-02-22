@@ -18,15 +18,15 @@
         ],
         "psr-4": {
             "App\\": "app/",
-            "cms\\cmspackage\\": "src/",
-            "cms\\cmspackage\\Tests\\": "tests/"
+            "Cms\\Cmspackage\\": "src/",
+            "Cms\\Cmspackage\\Tests\\": "tests/"
         }
     },
     "extra": 
     {
       "laravel": 
       {
-          "providers": [ "cms\\cmspackage\\CmsServiceProvider" ]
+          "providers": [ "Cms\\Cmspackage\\CmsServiceProvider" ]
       }
     },
     "scripts": {

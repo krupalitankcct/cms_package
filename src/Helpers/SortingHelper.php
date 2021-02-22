@@ -1,6 +1,6 @@
 <?php
 
-namespace cms\cmspackage\Helpers;
+namespace Cms\Cmspackage\Helpers;
 
 use Illuminate\Support\Facades\Request;
 

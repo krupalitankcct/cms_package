@@ -1,6 +1,6 @@
 <?php
 
-namespace cms\cmspackage\Tests;
+namespace Cms\Cmspackage\Tests;
 
 use Tests\TestCase;
 use cms\cmspackage\CmsServiceProvider;
