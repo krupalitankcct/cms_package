@@ -10,7 +10,7 @@ Daynamic content management packages Run bellow command to install
 
 ### Route Url
 
-2.this route to view your cms page list your project directory admin/cms_list
+This route to view your cms page list your project directory admin/cms_list
 
 ### Configuration
 
