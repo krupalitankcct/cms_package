@@ -24,11 +24,6 @@ class CmsList extends Component
      */
     public function render()
     {
-        if(config::get('cms.use_published_view') == "true"){
-            return view('backend.cms.components.cms_list');
-        }else{
-           return view('cms::Backend.components.cms_list');
-        }
-       
+        return view('cms::Backend.components.cms_list');
     }
 }

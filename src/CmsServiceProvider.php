@@ -14,24 +14,18 @@ class CmsServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->loadMigrationsFrom(__DIR__.'/./../publishable/database/migrations');
+
         $this->loadViewsFrom(__DIR__.'/./../resources/views','cms');
-        $this->loadViewsFrom(__DIR__.'/./../resources/views/Frontend','cms_frontend');
-        $this->publishes([
-        __DIR__.'/./../resources/views/Backend' => resource_path('views/backend/cms/'),
-        'views']);
-        $this->publishes([
-        __DIR__.'/./../resources/views/Frontend' => resource_path('views/frontend/cms/'),
-        'views']);
 
         $this->mergeConfigFrom(__DIR__.'/../config/constant.php', 'cms');
 
         $this->publishes([
+        __DIR__.'/./../resources/views' => resource_path('views/vendor/cms'),
+        'views']);
+        
+        $this->publishes([
         __DIR__.'/../config/constant.php' => config_path('cms.php'),
         ]);
-
-        $this->publishes([
-            __DIR__.'/./../resources/lang' => resource_path('lang'),
-        ],'lang');
 
         $this->app['router']->namespace('Cms\Cmspackage\Http\Controllers\Backend')
                 ->middleware(['web'])
@@ -47,9 +41,7 @@ class CmsServiceProvider extends ServiceProvider
 
         $this->loadTranslationsFrom(__DIR__.'/./../resources/lang', 'cms_lang');
 
-        $this->publishes([
-        __DIR__.'/./../resources/lang/en' => resource_path('lang/en/cms/'),
-        ]);
+        
         $this->publishes([__DIR__.'/./../public' => public_path('cms/'),
             ], 'asset');
 
@@ -78,7 +70,7 @@ class CmsServiceProvider extends ServiceProvider
             CmsPage::class
         ]);
         Artisan::call('vendor:publish --tag="asset"');
-
+        
     }
     public function register()
     {

@@ -24,10 +24,6 @@ class CmsAdd extends Component
      */
     public function render()
     {
-        if(config::get('cms.use_published_view') == "true"){
-            return view('backend.cms.components.cms_add');
-        }else{
-            return view('cms::Backend.components.cms_add');
-        }
+        return view('cms::Backend.components.cms_add');
     }
 }

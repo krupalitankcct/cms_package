@@ -16,9 +16,9 @@ return [
 		'no_record'=>'No Record Found',
 	],
 	'cms_add'=>[
-		'title'=>'CMS Title',
-		'slug'=>'CMS Slug',
-		'discription'=>'CMS Description',
+		'title'=>'Title',
+		'slug'=>'Slug',
+		'discription'=>'Description',
 		'meta_title'=>'Meta Title',
 		'meta_des'=>'Meta Description',
 		'meta_key'=>'Meta keyword',
