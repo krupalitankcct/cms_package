@@ -22,8 +22,15 @@ class CmsController extends Controller
     }
     public function show($slug)
     {
-        $page = CMS::whereSlug($slug)->first();
-        return view('cms_frontend::index',compact('page'));
+        try{
+            // get cms list
+            $page = CMS::whereSlug($slug)->first();
+            return view('cms::Frontend.index',compact('page'));
+
+        }catch (\Exception $ex) {
+            Log::error($ex->getMessage());
+            return view('cms::Backend.error.505')->withFlashDanger($ex->getMessage());
+        }
     }
 
 }
