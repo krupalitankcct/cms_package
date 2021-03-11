@@ -69,7 +69,7 @@ class CmsController extends Controller
         
         }catch (\Exception $ex) {
             Log::error($ex->getMessage());
-            return view('cms::Backend.error.505')->withFlashDanger($ex->getMessage());
+            return Redirect::back()->withFlashDanger($ex->getMessage());
         }
     }
 
@@ -84,15 +84,15 @@ class CmsController extends Controller
         try{
         //validation rules
         $validator = Validator::make($request->all(),[
-            'name' => 'required|min:3',
+            'name' => 'required|min:3|max:255',
             'slug' => 'required|unique:cms|alpha',
             'description' => 'required',
         ]);
        //check validation
         if ($validator->fails()) {
-            return Redirect::back()->withErrors($validator);
+            return Redirect::back()->withErrors($validator)->withInput();
         }
-        // create 
+        
         $cms = Cms::create([
                             'name' => $request->name,
                             'slug' => $request->slug,
@@ -107,16 +107,22 @@ class CmsController extends Controller
 
         }catch (\Exception $ex) {
             Log::error($ex->getMessage());
-            return view('cms::Backend.error.505')->withFlashDanger($ex->getMessage());
+            return Redirect::back()->withFlashDanger($ex->getMessage());
         }
         
     }
 
     public function edit($id)
     {
-        $cmsPageEdit =  Cms::findOrFail($id);
-        
-        return view('cms::Backend.edit', compact('cmsPageEdit'));
+        try{
+
+            $cmsPageEdit =  Cms::findOrFail($id);
+            return view('cms::Backend.edit', compact('cmsPageEdit'));
+
+        }catch (\Exception $ex) {
+            Log::error($ex->getMessage());
+          return Redirect::back()->withFlashDanger($ex->getMessage());
+        }
 
     }
 
@@ -151,7 +157,7 @@ class CmsController extends Controller
 
         }catch (\Exception $ex) {
             Log::error($ex->getMessage());
-            return view('cms::Backend.error.505')->withFlashDanger($ex->getMessage());
+          return Redirect::back()->withFlashDanger($ex->getMessage());
         }
     }
 
@@ -167,7 +173,7 @@ class CmsController extends Controller
 
         }catch (\Exception $ex) {
             Log::error($ex->getMessage());
-            return view('cms::Backend.error.505')->withFlashDanger($ex->getMessage());
+            return Redirect::back()->withFlashDanger($ex->getMessage());
         }
     }
 
@@ -201,12 +207,18 @@ class CmsController extends Controller
 
     public function active($id)
     {
-        $cmsUpdate = $this->cms->findOrFail($id);
-        $cmsUpdate->status = 'Active';
-        $cmsUpdate->save();
+        try{
+            $cmsUpdate = $this->cms->findOrFail($id);
+            $cmsUpdate->status = 'Active';
+            $cmsUpdate->save();
 
-        // return redirect method
-        return redirect()->route('cms.cms_list')->withFlashSuccess(__('cms_lang::validation.custom.cms_active'));
+            // return redirect method
+            return redirect()->route('cms.cms_list')->withFlashSuccess(__('cms_lang::validation.custom.cms_active'));
+        
+        }catch (\Exception $ex) {
+            Log::error($ex->getMessage());
+            return Redirect::back()->withFlashDanger($ex->getMessage());
+        }
     }
 
     /**
@@ -216,11 +228,16 @@ class CmsController extends Controller
      */
     public function inactive($id)
     {
-        $cmsUpdate = $this->cms->findOrFail($id);
-        $cmsUpdate->status = 'Inactive';
-        $cmsUpdate->save();
+        try{
+            $cmsUpdate = $this->cms->findOrFail($id);
+            $cmsUpdate->status = 'Inactive';
+            $cmsUpdate->save();
 
-       // return redirect method
-        return redirect()->route('cms.cms_list')->withFlashSuccess(__('cms_lang::validation.custom.cms_inactive'));
+        // return redirect method
+            return redirect()->route('cms.cms_list')->withFlashSuccess(__('cms_lang::validation.custom.cms_inactive'));
+        }catch (\Exception $ex) {
+            Log::error($ex->getMessage());
+            return Redirect::back()->withFlashDanger($ex->getMessage());
+        }
     }
 }

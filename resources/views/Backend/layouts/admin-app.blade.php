@@ -63,8 +63,10 @@
   
   <body class="c-app">
     <main class="c-main">
-    @yield('content') 
+      @yield('content') 
     </main>
+    </div>
+  </div>
   
 
 

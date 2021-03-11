@@ -29,7 +29,7 @@ class CmsController extends Controller
 
         }catch (\Exception $ex) {
             Log::error($ex->getMessage());
-            return view('cms::Backend.error.505')->withFlashDanger($ex->getMessage());
+            return Redirect::back()->withFlashDanger($ex->getMessage());
         }
     }
 

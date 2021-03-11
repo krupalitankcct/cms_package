@@ -68,11 +68,9 @@
                                                     </a>
                                                 @endif
                                             </td>
-                                            <td>
-                                                <div class='btn-group'>
-                                                <a href="{{ route('cms.cms_edit',$cmsdata->id) }}"  class='btn btn-info '><i class="glyphicon glyphicon-edit"></i>Edit</a><a href="{{ route('cms.cms_destroy',$cmsdata->id) }}"  class='btn btn-danger'><i class="glyphicon glyphicon-remove"></i>Delete</a>
-                                                </div>
-                                            </td>
+                                            
+                                            <td class="btn-td">@include('cms::Backend.delete_popup', ['cmsdata' => $cmsdata])</td>
+                                               
                                         </tr>
                                     @endforeach
                                     @else
@@ -96,5 +94,7 @@
         </div>
     </div>
 @endsection
+
+
 
 
